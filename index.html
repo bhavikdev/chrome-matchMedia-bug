@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        margin: 1rem;
+        padding: 1rem;
+
+        background-color: gray;
+      }
+      .instruction {
+        padding: 10px;
+        margin: 10px;
+        background-color:yellow;
+        font-size: 1.2rem;
+      }
+      #winSize {
+        color: blue;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 1rem;
+      }
+      ul {
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      ul > li {
+        margin: 1rem;
+      }
+    </style>
+    <script>
+      function createListItem(query, result) {
+        const li = document.createElement('li');
+        li.appendChild(
+          document.createTextNode(`Query ${query} - Maches : ${result}`)
+        );
+
+        return li;
+      }
+      window.onload = function () {
+        const el = document.getElementById('mediaQueryResult');
+        const div = document.getElementById('winSize');
+        div.innerText = `Window.innerWidth =${window.innerWidth}`;
+        const query = [
+          '(max-width: 959.98px)',
+          '(max-width: 959.99px)',
+          '(max-width: 960px)',
+          '(min-width: 960.02px)',
+          '(min-width: 960.01px)',
+          '(min-width: 960px)',
+        ];
+        query.forEach((q) => console.log(q, window.matchMedia(q).matches));
+        query.forEach((q) => {
+          const result = window.matchMedia(q).matches;
+          if (el) {
+            el.appendChild(createListItem(q, result));
+          }
+          console.log(q, result);
+        });
+
+      };
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="instruction">Please open dev tool (F12), make Device toolbar visible using toggle Devide Toolbar icon ( : ⌘ ⇧ M ), set window to responsive with width=960, and Reload page</div>
+      <div id="winSize"></div>
+      <ul id="mediaQueryResult"></ul>
+    </div>
+  </body>
+</html>
